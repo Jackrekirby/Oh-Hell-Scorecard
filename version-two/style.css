@@ -191,7 +191,7 @@ input {
 
 .passive:active {
     background-color: var(--txt-color);
-    border-color: vvar(--txt-color);
+    border-color: var(--txt-color);
     color: var(--passive-color);
 }
 
