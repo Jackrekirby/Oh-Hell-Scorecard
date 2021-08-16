@@ -21,6 +21,7 @@
     font-weight: 700;
     color: rgb(250, 250, 250);
     font-size: min(7vw, 5vh);
+    /* -webkit-tap-highlight-color: transparent; */
 }
 
 body {
@@ -149,6 +150,12 @@ button:active {
     background-color: var(--txt-color);
 }
 
+button:hover {
+    color: red;
+    border-color: var(--txt-color);
+    background-color: var(--txt-color);
+}
+
 button:focus {
     outline: none;
 }
@@ -209,10 +216,10 @@ input {
     background-color: var(--passive-color);
     border-color: var(--passive-color);
 }
-
+/* 
 button {
     cursor: pointer;
     transition: background 1000ms ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
-}
+} */
