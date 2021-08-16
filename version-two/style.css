@@ -144,7 +144,13 @@ p {
 }
 
 button:active {
+    color: var(--bg-color);
     border-color: var(--txt-color);
+    background-color: var(--txt-color);
+}
+
+button:focus {
+    outline: none;
 }
 
 .inactive {
@@ -169,6 +175,24 @@ input {
     background-color: var(--good-color);
     border-color: var(--good-color);
     color: var(--txt-color);
+}
+
+.good:active {
+    background-color: var(--txt-color);
+    border-color: vvar(--txt-color);
+    color: var(--good-color);
+}
+
+.bad:active {
+    background-color: var(--txt-color);
+    border-color: var(--txt-color);
+    color: var(--bad-color);
+}
+
+.passive:active {
+    background-color: var(--txt-color);
+    border-color: vvar(--txt-color);
+    color: var(--passive-color);
 }
 
 .transparent {
