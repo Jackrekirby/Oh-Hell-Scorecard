@@ -1,0 +1,28 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Oh Hell Scoresheet</title>
+        <link rel="stylesheet" href="/viewstats/style.css" />
+    </head>
+    <body>
+        <h1>Oh Hell Scoresheet</h1>
+        <div id="buttons" class="btn-group"></div>
+
+        <!--    <p id="round">Round: X</p> -->
+        <!--    <div id="players"></div> -->
+
+        <div class="btn-group">
+            <button id="button-next" onclick="scoreboard.next(true)" disabled>
+                Next
+            </button>
+            <button id="button-back" onclick="scoreboard.back()" disabled>
+                Back
+            </button>
+        </div>
+
+        <table id="table"></table>
+        <script src="/oh_hell/index.js"></script>
+    </body>
+</html>

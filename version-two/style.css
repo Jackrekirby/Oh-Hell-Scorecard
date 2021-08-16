@@ -1,0 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+
+/* Add relative pages */
+/* Screen: End of Round. Go Backup, Avg Offset, Win Streak, Summary Stats, Avg Bet, Avg Got */
+
+:root {
+    --bg-color: black;
+    --btn-bg-color: rgb(23, 23, 23);
+    --border-color: rgb(53, 53, 53);
+    --txt-color: rgb(250, 250, 250);
+    --inactive-txt-color: rgb(53, 53, 53);
+    --good-color: rgb(66, 126, 4);
+    --bad-color: rgb(228, 104, 76);
+    --passive-color: rgb(4, 100, 124);
+}
+
+* {
+    text-align: center;
+    justify-content: center;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    color: rgb(250, 250, 250);
+    font-size: min(7vw, 5vh);
+}
+
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden;
+    background-color: black;
+}
+
+#xyz {
+    display: none;
+}
+
+/* begin, players abc xyz, rounds, mid-round, next-round, won, stats-scores, stats-bet*/
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background-color: transparent;
+    padding: 2vh 3vw;
+    grid-column-gap: 1vw;
+    grid-row-gap: 1vh;
+    margin: 0px;
+    width: 94vw;
+}
+
+.btn-item {
+    background-color: var(--btn-bg-color);
+    padding: 0rem;
+    text-align: center;
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    color: var(--txt-color);
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: min(0.4vw, 0.4vh);
+    border-style: solid;
+    border-color: var(--border-color);
+    border-radius: 1vw;
+}
+
+.title {
+    background-color: var(--bad-color);
+    font-weight: 700;
+    border-style: none;
+    border-radius: 0px;
+    height: 8vh;
+}
+
+.player-names {
+    height: 8vh;
+    padding-top: 0px;
+}
+
+.one-col {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.full-area {
+    height: 100vh;
+    font-size: min(9vw, 30vh);
+    border-radius: 0vw;
+}
+
+p {
+    position: absolute;
+    top: 55vh;
+    left: 50vw;
+    padding-top: 5vh;
+    text-align: center;
+    transform: translate(-50%, -50%);
+    color: var(--border-color);
+    font-size: min(6vw, 20vh);
+}
+
+.top-area {
+    height: 7vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.middle-area {
+    height: 36vh;
+}
+
+.middle-bottom-area {
+    height: 88vh;
+}
+
+.stat-middle-area {
+    height: 60vh;
+}
+
+.stat-bottom-area {
+    height: 13vh;
+}
+
+.top-middle-area {
+    height: 48vh;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.middle-area {
+    height: 36vh;
+}
+
+.bottom-area {
+    height: 36vh;
+    padding-bottom: 3vh;
+}
+
+.selected {
+    border-color: var(--txt-color);
+}
+
+button:active {
+    border-color: var(--txt-color);
+}
+
+.inactive {
+    color: rgb(53, 53, 53);
+}
+
+input {
+    text-transform: uppercase;
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.line {
+    padding-bottom: min(0.4vw, 0.4vh);
+    margin: 0.5vh 7vw;
+    background-color: var(--txt-color);
+}
+
+.good {
+    background-color: var(--good-color);
+    border-color: var(--good-color);
+    color: var(--txt-color);
+}
+
+.transparent {
+    background-color: var(--bg-color);
+    border-color: var(--bg-color);
+}
+
+.bad {
+    background-color: var(--bad-color);
+    border-color: var(--bad-color);
+}
+
+.passive {
+    background-color: var(--passive-color);
+    border-color: var(--passive-color);
+}
