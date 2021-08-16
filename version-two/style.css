@@ -213,7 +213,7 @@ input {
 
 button {
     cursor: pointer;
-    transition: background 10ms ease-in-out;
+    transition: background 1000ms ease-in-out;
     -webkit-appearance: none;
     -moz-appearance: none;
 }
