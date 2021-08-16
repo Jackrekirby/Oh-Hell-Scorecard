@@ -1,0 +1,84 @@
+* {
+    font-family: "Titillium Web", sans-serif;
+    font-weight: bold;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+.got-btn {
+    border-color: lightseagreen;
+    background-color: lightseagreen;
+    color: white;
+}
+
+button {
+    width: 100%;
+    height: 40px;
+    margin: 5px; /* or whatever you like */
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+#input-div {
+    text-align: center;
+    padding: 3rem;
+    background-color: #f7cac9;
+    /* border-color: #f7786b; */
+    /* border-style: solid; */
+    border-radius: 10rem;
+}
+
+th {
+    text-align: centre;
+    font-weight: bold;
+    background-color: #f7786b;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    overflow: auto;
+
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+table {
+    margin-top: 2rem;
+    border-collapse: separate;
+    width: 100%;
+    /* border-spacing: 0.5rem 0.3rem; */
+}
+
+tr {
+    background-color: #f7cac9;
+}
+
+td {
+    text-align: center;
+    /* border-radius: 15px; */
+}
+
+tr:hover {
+    background-color: #f7786b;
+    font-weight: bold;
+}
+
+button {
+    font-size: 1.5rem;
+}
+
+body {
+    /* background-color: #deeaee; */
+    /* background-image: linear-gradient(#92a8d1, #034f84); */
+}
