@@ -87,6 +87,14 @@ class PlayerNames {
         this.names = Array();
     }
 
+    movePlayer(id) {
+        let name = this.names[id].name;
+        this.names[id].name = this.names[id - 1].name;
+        this.names[id - 1].name = name;
+        this.names[id].update();
+        this.names[id - 1].update();
+    }
+
     pushLetter(letter) {
         if (this.numPlayers == 0) {
             this.newPlayer();
@@ -197,4 +205,4 @@ function toABCKeyboard() {
 }
 
 let playerNames = new PlayerNames();
-createKeyboard();
+//createKeyboard();

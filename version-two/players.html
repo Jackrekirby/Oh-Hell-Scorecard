@@ -19,27 +19,117 @@
                 <button class="btn-item transparent player-name" disabled>
                     ---
                 </button>
-                <button class="btn-item transparent player-name" disabled>
+                <button
+                    class="btn-item transparent player-name"
+                    onclick="playerNames.movePlayer(1);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name" disabled>
+                <button
+                    class="btn-item transparent player-name"
+                    onclick="playerNames.movePlayer(2);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(3);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(4);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(5);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(6);"
+                    disabled
+                >
                     ---
                 </button>
             </div>
             <div class="line"></div>
             <div id="keyboard" class="btn-grid bottom-area">
+                <button
+                    onclick="playerNames.pushLetter('A');"
+                    class="btn-item letter"
+                >
+                    A</button
+                ><button
+                    onclick="playerNames.pushLetter('B');"
+                    class="btn-item letter"
+                >
+                    B</button
+                ><button
+                    onclick="playerNames.pushLetter('C');"
+                    class="btn-item letter"
+                >
+                    C</button
+                ><button
+                    onclick="playerNames.pushLetter('D');"
+                    class="btn-item letter"
+                >
+                    D</button
+                ><button
+                    onclick="playerNames.pushLetter('E');"
+                    class="btn-item letter"
+                >
+                    E</button
+                ><button
+                    onclick="playerNames.pushLetter('F');"
+                    class="btn-item letter"
+                >
+                    F</button
+                ><button
+                    onclick="playerNames.pushLetter('G');"
+                    class="btn-item letter"
+                >
+                    G</button
+                ><button
+                    onclick="playerNames.pushLetter('H');"
+                    class="btn-item letter"
+                >
+                    H</button
+                ><button
+                    onclick="playerNames.pushLetter('I');"
+                    class="btn-item letter"
+                >
+                    I</button
+                ><button
+                    onclick="playerNames.pushLetter('J');"
+                    class="btn-item letter"
+                >
+                    J</button
+                ><button
+                    onclick="playerNames.pushLetter('K');"
+                    class="btn-item letter"
+                >
+                    K</button
+                ><button
+                    onclick="playerNames.pushLetter('L');"
+                    class="btn-item letter"
+                >
+                    L</button
+                ><button
+                    onclick="playerNames.pushLetter('M');"
+                    class="btn-item letter"
+                >
+                    M
+                </button>
                 <button
                     class="btn-item good toggle"
                     onclick="toggleKeyboard();"
@@ -49,11 +139,11 @@
                 <button
                     class="btn-item bad delete-player-btn"
                     onclick="playerNames.deleteLetter();"
-                    disabled
+                    disabled=""
                 >
                     DEL
                 </button>
-                <button class="btn-item passive next-player-btn" disabled>
+                <button class="btn-item passive next-player-btn" disabled="">
                     NXT
                 </button>
             </div>
