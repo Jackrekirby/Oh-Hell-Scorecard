@@ -1,0 +1,74 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>Oh Hell Scorecard</title>
+    </head>
+    <body>
+        <div id="players">
+            <div class="btn-item title" onclick="openFullscreen();">
+                Oh Hell Scorecard
+            </div>
+            <div class="btn-grid top-area one-col">
+                <div class="btn-item transparent">Players</div>
+            </div>
+            <div class="line"></div>
+            <div class="btn-grid middle-area one-col">
+                <button class="btn-item transparent player-name" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name hide" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name hide" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name hide" disabled>
+                    ---
+                </button>
+                <button class="btn-item transparent player-name hide" disabled>
+                    ---
+                </button>
+            </div>
+            <div class="line"></div>
+            <div id="keyboard" class="btn-grid bottom-area">
+                <button class="btn-item letter">A</button>
+                <button class="btn-item letter">B</button>
+                <button class="btn-item letter">C</button>
+                <button class="btn-item letter">D</button>
+                <button class="btn-item letter">E</button>
+                <button class="btn-item letter">F</button>
+                <button class="btn-item letter">G</button>
+                <button class="btn-item letter">H</button>
+                <button class="btn-item letter">I</button>
+                <button class="btn-item letter">J</button>
+                <button class="btn-item letter">K</button>
+                <button class="btn-item letter">L</button>
+                <button class="btn-item letter">M</button>
+                <button
+                    class="btn-item good toggle"
+                    onclick="toggleKeyboard();"
+                >
+                    XYZ
+                </button>
+                <button
+                    class="btn-item bad delete-player-btn"
+                    onclick="playerNames.deleteLetter();"
+                    disabled
+                >
+                    DEL
+                </button>
+                <button class="btn-item passive">NXT</button>
+            </div>
+        </div>
+        <script src="../index.js"></script>
+    </body>
+</html>
