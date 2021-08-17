@@ -103,13 +103,13 @@ p {
 }
 
 .top-area {
-    height: 7vh;
+    height: 5vh;
     padding-top: 1vh;
     padding-bottom: 1vh;
 }
 
 .middle-area {
-    height: 36vh;
+    height: 40vh;
 }
 
 .middle-bottom-area {
@@ -130,12 +130,8 @@ p {
     padding-bottom: 1vh;
 }
 
-.middle-area {
-    height: 36vh;
-}
-
 .bottom-area {
-    height: 36vh;
+    height: 34vh;
     padding-bottom: 3vh;
 }
 
@@ -208,4 +204,26 @@ input {
 .passive {
     background-color: var(--passive-color);
     border-color: var(--passive-color);
+}
+
+.player-name:disabled {
+    color: rgb(53, 53, 53);
+}
+
+.bad:disabled {
+    text-decoration: line-through;
+    background-color: var(--txt-color);
+    border-color: var(--txt-color);
+    color: var(--bad-color);
+}
+
+.passive:disabled {
+    text-decoration: line-through;
+    background-color: var(--txt-color);
+    border-color: var(--txt-color);
+    color: var(--passive-color);
+}
+
+.hide {
+    display: none;
 }
