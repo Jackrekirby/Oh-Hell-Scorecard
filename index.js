@@ -40,13 +40,30 @@ class PlayerName {
             this.name = this.name.replaceAt(this.length, letter);
             this.length++;
             this.update();
+            if (this.length != PlayerName.namelength) {
+                document.getElementsByClassName(
+                    "next-player-btn"
+                )[0].disabled = true;
+            }
             if (
-                this.id == PlayerNames.minPlayers - 1 &&
+                this.id >= PlayerNames.minPlayers - 1 &&
                 this.length == PlayerName.namelength
             ) {
                 document.getElementsByClassName(
                     "next-player-btn"
                 )[0].disabled = false;
+            }
+            // display max 7 players box instead of disabling!
+            if (
+                this.id == PlayerNames.maxPlayers - 1 &&
+                this.length == PlayerName.namelength
+            ) {
+                let letters = document
+                    .getElementById("keyboard")
+                    .getElementsByClassName("letter");
+                for (let letter of letters) {
+                    letter.disabled = true;
+                }
             }
             return true;
         }
@@ -54,15 +71,26 @@ class PlayerName {
     }
 
     remove() {
-        if (this.id == PlayerNames.minPlayers - 1) {
-            document.getElementsByClassName(
-                "next-player-btn"
-            )[0].disabled = true;
+        let letters = document
+            .getElementById("keyboard")
+            .getElementsByClassName("letter");
+        for (let letter of letters) {
+            letter.disabled = false;
         }
+
         if (this.length > 0) {
             this.name = this.name.replaceAt(this.length - 1, "-");
             this.length--;
             this.update();
+            if (this.id <= PlayerNames.minPlayers - 1) {
+                document.getElementsByClassName(
+                    "next-player-btn"
+                )[0].disabled = true;
+            } else {
+                document.getElementsByClassName("next-player-btn")[0].disabled =
+                    this.length != 0;
+            }
+
             if (this.length == 0) {
                 document.getElementsByClassName("player-name")[
                     this.id
@@ -70,6 +98,12 @@ class PlayerName {
             } else {
                 return true;
             }
+            return false;
+        }
+        if (this.id > 0) {
+            document.getElementsByClassName(
+                "next-player-btn"
+            )[0].disabled = false;
         }
         return false;
     }
@@ -89,10 +123,11 @@ class PlayerNames {
 
     movePlayer(id) {
         let name = this.names[id].name;
-        this.names[id].name = this.names[id - 1].name;
-        this.names[id - 1].name = name;
+        let id2 = id - 1;
+        this.names[id].name = this.names[id2].name;
+        this.names[id2].name = name;
         this.names[id].update();
-        this.names[id - 1].update();
+        this.names[id2].update();
     }
 
     pushLetter(letter) {
@@ -142,7 +177,6 @@ class PlayerNames {
                     [this.numPlayers].classList.remove("hide");
             }
             this.names.push(new PlayerName(this.numPlayers));
-        } else {
         }
     }
 
@@ -199,9 +233,39 @@ function createKeyboard() {
     }
 }
 
-function toABCKeyboard() {
-    document.getElementById("abc-keyboard").classList.remove("hide");
-    document.getElementById("xyz-keyboard").classList.add("hide");
+function toWelcomeScreen() {
+    document.getElementById("welcome").classList.remove("hide");
+    document.getElementById("players").classList.add("hide");
+}
+
+function toPlayerScreen(from) {
+    document.getElementById("players").classList.remove("hide");
+    document.getElementById(from).classList.add("hide");
+}
+
+function toNumRoundsScreen() {
+    document.getElementById("rounds").classList.remove("hide");
+    document.getElementById("players").classList.add("hide");
+    let maxRounds = Math.floor(52 / playerNames.numPlayers);
+
+    let keyboard = document
+        .getElementById("rounds")
+        .getElementsByClassName("keyboard")[0];
+
+    while (keyboard.getElementsByClassName("number")[0] != null) {
+        keyboard.getElementsByClassName("number")[0].remove();
+    }
+
+    for (let i = maxRounds; i > 0; i--) {
+        button = document.createElement("button");
+        button.setAttribute("onClick", ``);
+        button.classList.add("btn-item", "number");
+        button.innerHTML = `${i}`;
+        keyboard.insertBefore(button, keyboard.childNodes[0]);
+    }
+    keyboard.getElementsByClassName("back-btn")[0].style.gridColumn = `span ${
+        4 - (maxRounds % 4)
+    }`;
 }
 
 let playerNames = new PlayerNames();

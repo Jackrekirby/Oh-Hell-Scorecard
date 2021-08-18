@@ -7,7 +7,16 @@
         <title>Oh Hell Scorecard</title>
     </head>
     <body>
-        <div id="players">
+        <div id="welcome">
+            <div
+                class="btn-item full-area bad"
+                onclick="toPlayerScreen('welcome');"
+            >
+                Oh Hell Scorecard
+            </div>
+            <p class="transparent-to-clicks">Click to Start</p>
+        </div>
+        <div id="players" class="hide">
             <div class="btn-item title" onclick="openFullscreen();">
                 Oh Hell Scorecard
             </div>
@@ -15,44 +24,124 @@
                 <div class="btn-item transparent">Players</div>
             </div>
             <div class="line"></div>
-            <div class="btn-grid middle-area one-col">
-                <button class="btn-item transparent player-name" disabled>
+            <div class="column middle-area one-col">
+                <button
+                    class="btn-item transparent player-name non-clickable"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name" disabled>
+                <button
+                    class="btn-item transparent player-name"
+                    onclick="playerNames.movePlayer(1);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name" disabled>
+                <button
+                    class="btn-item transparent player-name"
+                    onclick="playerNames.movePlayer(2);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(3);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(4);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(5);"
+                    disabled
+                >
                     ---
                 </button>
-                <button class="btn-item transparent player-name hide" disabled>
+                <button
+                    class="btn-item transparent player-name hide"
+                    onclick="playerNames.movePlayer(6);"
+                    disabled
+                >
                     ---
                 </button>
             </div>
             <div class="line"></div>
             <div id="keyboard" class="btn-grid bottom-area">
-                <button class="btn-item letter">A</button>
-                <button class="btn-item letter">B</button>
-                <button class="btn-item letter">C</button>
-                <button class="btn-item letter">D</button>
-                <button class="btn-item letter">E</button>
-                <button class="btn-item letter">F</button>
-                <button class="btn-item letter">G</button>
-                <button class="btn-item letter">H</button>
-                <button class="btn-item letter">I</button>
-                <button class="btn-item letter">J</button>
-                <button class="btn-item letter">K</button>
-                <button class="btn-item letter">L</button>
-                <button class="btn-item letter">M</button>
+                <button
+                    onclick="playerNames.pushLetter('A');"
+                    class="btn-item letter"
+                >
+                    A</button
+                ><button
+                    onclick="playerNames.pushLetter('B');"
+                    class="btn-item letter"
+                >
+                    B</button
+                ><button
+                    onclick="playerNames.pushLetter('C');"
+                    class="btn-item letter"
+                >
+                    C</button
+                ><button
+                    onclick="playerNames.pushLetter('D');"
+                    class="btn-item letter"
+                >
+                    D</button
+                ><button
+                    onclick="playerNames.pushLetter('E');"
+                    class="btn-item letter"
+                >
+                    E</button
+                ><button
+                    onclick="playerNames.pushLetter('F');"
+                    class="btn-item letter"
+                >
+                    F</button
+                ><button
+                    onclick="playerNames.pushLetter('G');"
+                    class="btn-item letter"
+                >
+                    G</button
+                ><button
+                    onclick="playerNames.pushLetter('H');"
+                    class="btn-item letter"
+                >
+                    H</button
+                ><button
+                    onclick="playerNames.pushLetter('I');"
+                    class="btn-item letter"
+                >
+                    I</button
+                ><button
+                    onclick="playerNames.pushLetter('J');"
+                    class="btn-item letter"
+                >
+                    J</button
+                ><button
+                    onclick="playerNames.pushLetter('K');"
+                    class="btn-item letter"
+                >
+                    K</button
+                ><button
+                    onclick="playerNames.pushLetter('L');"
+                    class="btn-item letter"
+                >
+                    L</button
+                ><button
+                    onclick="playerNames.pushLetter('M');"
+                    class="btn-item letter"
+                >
+                    M
+                </button>
                 <button
                     class="btn-item good toggle"
                     onclick="toggleKeyboard();"
@@ -66,7 +155,45 @@
                 >
                     DEL
                 </button>
-                <button class="btn-item passive">NXT</button>
+                <button
+                    class="btn-item passive next-player-btn"
+                    disabled
+                    onclick="toNumRoundsScreen();"
+                >
+                    NXT
+                </button>
+            </div>
+        </div>
+
+        <div id="rounds" class="hide">
+            <div class="btn-item title" onclick="openFullscreen();">
+                Oh Hell Scorecard
+            </div>
+            <div class="btn-grid top-middle-area one-col">
+                <div class="btn-item transparent">Rounds</div>
+            </div>
+            <div class="line"></div>
+            <div class="keyboard btn-grid bottom-area">
+                <!-- <button class="btn-item">0</button>
+                <button class="btn-item">1</button>
+                <button class="btn-item">2</button>
+                <button class="btn-item">3</button>
+                <button class="btn-item">4</button>
+                <button class="btn-item">5</button>
+                <button class="btn-item">6</button>
+                <button class="btn-item">7</button>
+                <button class="btn-item">8</button>
+                <button class="btn-item">9</button>
+                <button class="btn-item">10</button>
+                <button class="btn-item">11</button>
+                <button class="btn-item">12</button>
+                <button class="btn-item">13</button> -->
+                <button
+                    class="back-btn btn-item bad span-two"
+                    onclick="toPlayerScreen('rounds');"
+                >
+                    BCK
+                </button>
             </div>
         </div>
         <script src="../index.js"></script>

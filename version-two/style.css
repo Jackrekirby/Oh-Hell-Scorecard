@@ -51,6 +51,16 @@ body {
     width: 94vw;
 }
 
+.column {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 94vw;
+}
+
 .btn-item {
     background-color: var(--btn-bg-color);
     padding: 0rem;
@@ -153,6 +163,10 @@ button:focus {
     outline: none;
 }
 
+strike {
+    color: var(--bad-color);
+}
+
 .inactive {
     color: rgb(53, 53, 53);
 }
@@ -210,6 +224,10 @@ input {
     border-color: var(--passive-color);
 }
 
+.letter:disabled {
+    color: rgb(53, 53, 53);
+}
+
 .player-name:disabled {
     color: rgb(53, 53, 53);
 }
@@ -230,4 +248,18 @@ input {
 
 .hide {
     display: none;
+}
+
+.non-clickable:active {
+    color: inherit;
+    border-color: var(--bg-color);
+    background-color: inherit;
+}
+
+.ignore-strike:active {
+    color: black;
+}
+
+.transparent-to-clicks {
+    pointer-events: none;
 }
