@@ -521,7 +521,7 @@ class Player {
 
         if (this.roundScore == null) {
             if (this.lastRound == null) {
-                element.innerHTML = "BET";
+                element.innerHTML = "SUM";
             } else {
                 element.innerHTML = this.lastRound.totalScore;
             }
@@ -719,6 +719,10 @@ class Scoreboard {
         }
 
         if (!this.areBetting) {
+            for (let i = 0; i <= this.remainingGot; i++) {
+                this.enableValue(i);
+            }
+
             if (this.remainingGot == 0) {
                 this.setValue(0);
             } else if (this.isLastPlayer) {
@@ -749,7 +753,6 @@ class Scoreboard {
         for (let plyName of playerNames.names) {
             th = document.createElement("th");
             th.innerHTML = plyName.name;
-            th.colSpan = 3;
             row.appendChild(th);
         }
         table.appendChild(row);
@@ -765,18 +768,38 @@ class Scoreboard {
             row.appendChild(td);
             console.log(round.players);
             for (let player of round.players) {
-                console.log(player);
                 let td = document.createElement("td");
-                td.innerHTML = player.bet;
-                row.appendChild(td);
-                td = document.createElement("td");
-                td.innerHTML = player.got;
-                row.appendChild(td);
-                td = document.createElement("td");
-                td.innerHTML = player.totalScore;
+                let cell = document.createElement("div");
+                cell.classList.add("table-cell");
+
+                console.log(player);
+                let div = document.createElement("div");
+                div.innerHTML = player.bet;
+                cell.appendChild(div);
+
+                div = document.createElement("div");
+                div.innerHTML = player.got;
+                cell.appendChild(div);
+
+                div = document.createElement("div");
+                div.innerHTML = player.totalScore;
+                cell.appendChild(div);
+                td.appendChild(cell);
                 row.appendChild(td);
             }
             table.appendChild(row);
+        }
+    }
+
+    enableValue(value) {
+        let element = document
+            .getElementById("new-round")
+            .getElementsByClassName("numpad")[0]
+            .getElementsByClassName(`value-${value}`)[0];
+        //console.log(value, element);
+        if (element != undefined) {
+            element.disabled = false;
+            element.classList.remove("inactive");
         }
     }
 
@@ -798,7 +821,7 @@ class Scoreboard {
         if (this.areBetting) {
             this.totalBet;
             document.getElementById("remaining-bet").innerHTML =
-                this.remainingBet;
+                -this.remainingBet;
 
             for (let element of document
                 .getElementById("new-round")
@@ -883,6 +906,7 @@ class Scoreboard {
         }
 
         buildKeyboard(this.cardsEach, false);
+        this.selectCurrent();
     }
 
     returnToRound() {
@@ -920,10 +944,12 @@ class Scoreboard {
             let currentRound = this.round;
             this.index--;
             if (this.round != currentRound) {
+                console.log("here");
                 this.reloadCompleteRound();
-                this.nextRoundButtons();
+                this.selectCurrent(true);
                 return;
             }
+            this.selectCurrent();
             //midround
             this.removeValue();
         }
@@ -946,11 +972,35 @@ class Scoreboard {
         }${Scoreboard.suits[this.suit]} <br /> ${dealer} is Dealer`;
     }
 
+    selectCurrent(unselect = false) {
+        while (
+            document
+                .getElementById("scoresheet")
+                .getElementsByClassName("selected")[0] != null
+        ) {
+            document
+                .getElementById("scoresheet")
+                .getElementsByClassName("selected")[0]
+                .classList.remove("selected");
+        }
+
+        if (!unselect) {
+            let element = document
+                .getElementById("scoresheet")
+                .getElementsByClassName(this.areBetting ? "bet" : "got")[
+                this.player
+            ];
+
+            element.classList.add("selected");
+        }
+    }
+
     next() {
         if (this.hasRoundEnded) {
             this.nextRoundButtons();
         } else {
             this.index++;
+            this.selectCurrent();
         }
     }
 }

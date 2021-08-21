@@ -18,8 +18,7 @@
     text-align: center;
     justify-content: center;
     font-family: "Sora", sans-serif;
-    font-weight: 700;
-    color: rgb(250, 250, 250);
+
     font-size: min(7vw, 5vh);
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none; /* Firefox */
@@ -49,6 +48,8 @@ body {
     grid-row-gap: 1vh;
     margin: 0px;
     width: 94vw;
+    color: rgb(250, 250, 250);
+    font-weight: 700;
 }
 
 .column {
@@ -269,7 +270,7 @@ table {
     width: 100%;
     background-color: white;
     border-style: solid;
-    border-color: black !important;
+    border-color: black;
     border-collapse: collapse;
     border-width: thin;
 }
@@ -277,10 +278,21 @@ table {
 th,
 td {
     border-style: solid;
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     font-weight: normal;
-    color: black !important;
     border-width: thin;
     margin: 0px;
     padding: 0px;
+}
+
+.table-cell {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.table-cell > * {
+    font-size: 0.5rem;
+    font-weight: normal;
 }
