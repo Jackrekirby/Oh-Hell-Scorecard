@@ -263,3 +263,24 @@ input {
 .transparent-to-clicks {
     pointer-events: none;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    border-style: solid;
+    border-color: black !important;
+    border-collapse: collapse;
+    border-width: thin;
+}
+
+th,
+td {
+    border-style: solid;
+    font-size: 0.7rem;
+    font-weight: normal;
+    color: black !important;
+    border-width: thin;
+    margin: 0px;
+    padding: 0px;
+}

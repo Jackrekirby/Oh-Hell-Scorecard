@@ -214,7 +214,10 @@
                     9♡<br />
                     IAN is Dealer
                 </button>
-                <button class="btn-item bad" onclick="toStatsScoresScreen()">
+                <button
+                    class="btn-item bad"
+                    onclick="toStatsScoresScreen(true)"
+                >
                     End Game
                 </button>
             </div>
@@ -234,9 +237,52 @@
             ></div>
             <div class="line"></div>
             <div class="btn-grid stat-bottom-area two-col">
-                <button class="btn-item bad">Back</button>
-                <button class="btn-item good">Next</button>
+                <button
+                    class="btn-item bad"
+                    onclick="backFromStatsScoresScreen();"
+                >
+                    Back
+                </button>
+                <button
+                    class="btn-item good"
+                    onclick="toStatsCorrectBetsScreen();"
+                >
+                    Next
+                </button>
             </div>
+        </div>
+
+        <div id="stats-correct-bets" class="hide">
+            <div class="btn-item title" onclick="openFullscreen();">
+                Oh Hell Scorecard
+            </div>
+            <div class="btn-grid top-area one-col">
+                <div class="btn-item transparent">Correct Bets</div>
+            </div>
+            <div class="line"></div>
+            <div
+                id="score-corr-bets"
+                class="btn-grid stat-middle-area two-col"
+            ></div>
+            <div class="line"></div>
+            <div class="btn-grid stat-bottom-area two-col">
+                <button
+                    class="btn-item bad"
+                    onclick="switchScreen('stats-scores', 'stats-correct-bets');"
+                >
+                    Back
+                </button>
+                <button
+                    class="btn-item passive"
+                    onclick="scoreboard.makeTable();"
+                >
+                    View Table
+                </button>
+            </div>
+        </div>
+
+        <div id="table-screen" class="hide">
+            <table id="table"></table>
         </div>
         <script src="../index.js"></script>
     </body>

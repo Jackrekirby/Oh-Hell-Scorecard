@@ -357,7 +357,12 @@ function toNumRoundsScreen() {
 
 function toStatsScoresScreen() {
     switchScreen("stats-scores", "new-round");
-    let ranks = document.getElementById("score-ranks");
+    let rankElement = document.getElementById("score-ranks");
+
+    while (rankElement.getElementsByClassName("btn-item")[0] != null) {
+        rankElement.getElementsByClassName("btn-item")[0].remove();
+    }
+
     let scores = Array();
     for (let i = 0; i < playerNames.numPlayers; i++) {
         scores.push(
@@ -365,45 +370,99 @@ function toStatsScoresScreen() {
         );
     }
 
-    console.log(scores);
-    let unsorted_scores = Array.from(scores);
-    scores.sort(function (a, b) {
-        return b - a;
-    });
-    console.log(scores, unsorted_scores);
-    let player_pos = Array();
+    ranks = rankArray(scores);
 
-    for (let i = 0; i < playerNames.numPlayers; i++) {
-        player_pos.push(scores.indexOf(unsorted_scores[i]));
-    }
-
-    let player_order = Array();
-
-    for (let i = 0; i < playerNames.numPlayers; i++) {
-        let index = 0;
-        while (true) {
-            let j = player_pos.slice(index, -1).indexOf(i);
-            if (j == -1) break;
-            index += j;
-            player_order.push(index);
-            index++;
-        }
-    }
-
-    console.log(unsorted_scores, scores, player_pos, player_order);
-
-    for (let i = 0; i < playerNames.numPlayers; i++) {
+    for (let rank of ranks) {
         let div = document.createElement("div");
         div.classList.add("btn-item", "transparent");
-        div.innerHTML = playerNames.names[i].name;
-        ranks.appendChild(div);
+        div.innerHTML = playerNames.names[rank].name;
+        rankElement.appendChild(div);
 
         div = document.createElement("div");
         div.classList.add("btn-item", "transparent");
         div.innerHTML =
-            scoreboard.rounds[scoreboard.round - 1].players[i].totalScore;
-        ranks.appendChild(div);
+            scoreboard.rounds[scoreboard.round - 1].players[rank].totalScore;
+        rankElement.appendChild(div);
     }
+}
+
+function toStatsCorrectBetsScreen() {
+    switchScreen("stats-correct-bets", "stats-scores");
+    let rankElement = document.getElementById("score-corr-bets");
+
+    while (rankElement.getElementsByClassName("btn-item")[0] != null) {
+        rankElement.getElementsByClassName("btn-item")[0].remove();
+    }
+
+    let scores = Array();
+    for (let i = 0; i < playerNames.numPlayers; i++) {
+        let sumCorrectBets = 0;
+        for (let round of scoreboard.rounds) {
+            console.log(round);
+            console.log(round.players[i]);
+            if (round.players[i].betCorrectly()) {
+                sumCorrectBets++;
+            }
+        }
+        scores.push(sumCorrectBets);
+    }
+
+    console.log(scores);
+
+    ranks = rankArray(scores);
+
+    for (let rank of ranks) {
+        let div = document.createElement("div");
+        div.classList.add("btn-item", "transparent");
+        div.innerHTML = playerNames.names[rank].name;
+        rankElement.appendChild(div);
+
+        div = document.createElement("div");
+        div.classList.add("btn-item", "transparent");
+        div.innerHTML = scores[rank];
+        rankElement.appendChild(div);
+    }
+}
+
+function backFromStatsScoresScreen() {
+    switchScreen("new-round", "stats-scores");
+    scoreboard.reloadCompleteRound(true);
+}
+
+function rankArray(array) {
+    // console.log(array);
+    let sorted_array = Array.from(array);
+    sorted_array.sort(function (a, b) {
+        return b - a;
+    });
+
+    // console.log(sorted_array);
+
+    let indices = Array();
+
+    for (let element of array) {
+        indices.push(sorted_array.indexOf(element));
+    }
+
+    // console.log(indices);
+
+    let indicesOfIndices = Array();
+
+    for (let i = 0; i < array.length; i++) {
+        let searchFrom = 0;
+        //console.log("searching", i);
+        while (true) {
+            let index = indices.slice(searchFrom).indexOf(i);
+            if (index == -1) break;
+            searchFrom += index;
+            //console.log("index", searchFrom);
+            indicesOfIndices.push(searchFrom);
+            searchFrom++;
+        }
+    }
+
+    // console.log(indicesOfIndices);
+    return indicesOfIndices;
 }
 
 class Player {
@@ -473,6 +532,15 @@ class Player {
         }
     }
 
+    betCorrectly() {
+        console.log(
+            this.bet,
+            this.got,
+            this.bet == this.got && this.bet != null
+        );
+        return this.bet == this.got && this.bet != null;
+    }
+
     removeBet() {
         this.bet = null;
         this.displayBet();
@@ -520,7 +588,8 @@ class Player {
 }
 
 class Round {
-    constructor(cardsEach, numPlayers) {
+    constructor(index, cardsEach, numPlayers) {
+        this.index = index;
         this.players = Array();
         for (let i = 0; i < numPlayers; i++) {
             this.players.push(new Player(i));
@@ -554,6 +623,20 @@ class Scoreboard {
 
     get cardsEach() {
         let a = this.startRound - this.round;
+        if (a < 1) a = 1 - a;
+        return a;
+    }
+
+    getSuitIcon(round = this.round) {
+        return Scoreboard.suits[this.getSuit(round)];
+    }
+
+    getSuit(round = this.round) {
+        return round % 5;
+    }
+
+    getCardsEach(round = this.round) {
+        let a = this.startRound - round;
         if (a < 1) a = 1 - a;
         return a;
     }
@@ -642,7 +725,7 @@ class Scoreboard {
                 this.setValue(this.remainingGot);
             } else {
                 if (this.remainingGot != this.cardsEach) {
-                    console.log(this.remainingGot, this.cardsEach);
+                    //console.log(this.remainingGot, this.cardsEach);
                     for (
                         let i = this.remainingGot + 1;
                         i <= this.cardsEach;
@@ -655,12 +738,54 @@ class Scoreboard {
         }
     }
 
+    makeTable() {
+        switchScreen("table-screen", "stats-correct-bets");
+        let table = document.getElementById("table");
+        let row = document.createElement("tr");
+
+        let th = document.createElement("th");
+        th.innerHTML = "Round";
+        row.appendChild(th);
+        for (let plyName of playerNames.names) {
+            th = document.createElement("th");
+            th.innerHTML = plyName.name;
+            th.colSpan = 3;
+            row.appendChild(th);
+        }
+        table.appendChild(row);
+
+        document.body.style.backgroundColor = "white";
+
+        for (let round of this.rounds) {
+            let row = document.createElement("tr");
+            let td = document.createElement("td");
+            td.innerHTML = `${this.getCardsEach(round.index)}${this.getSuitIcon(
+                round.index
+            )}`;
+            row.appendChild(td);
+            console.log(round.players);
+            for (let player of round.players) {
+                console.log(player);
+                let td = document.createElement("td");
+                td.innerHTML = player.bet;
+                row.appendChild(td);
+                td = document.createElement("td");
+                td.innerHTML = player.got;
+                row.appendChild(td);
+                td = document.createElement("td");
+                td.innerHTML = player.totalScore;
+                row.appendChild(td);
+            }
+            table.appendChild(row);
+        }
+    }
+
     disableValue(value) {
         let element = document
             .getElementById("new-round")
             .getElementsByClassName("numpad")[0]
             .getElementsByClassName(`value-${value}`)[0];
-        console.log(value, element);
+        //console.log(value, element);
         if (element != undefined) {
             element.disabled = true;
             element.classList.add("inactive");
@@ -701,7 +826,9 @@ class Scoreboard {
     }
 
     newRound() {
-        this.rounds.push(new Round(this.cardsEach, this.numPlayers));
+        this.rounds.push(
+            new Round(this.round, this.cardsEach, this.numPlayers)
+        );
 
         let scoresheet = document.getElementById("scoresheet");
 
@@ -768,6 +895,24 @@ class Scoreboard {
         this.removeValue();
     }
 
+    reloadCompleteRound(fromEndGame = false) {
+        console.log(this.index);
+        if (fromEndGame) {
+            this.index--;
+        }
+        console.log(this.index, this.round);
+        for (let player of this.rounds[this.round].players) {
+            player.displayAll();
+        }
+
+        document.getElementById(
+            "round-suit"
+        ).innerHTML = `${this.cardsEach}${this.suitIcon}`;
+
+        document.getElementById("remaining-bet").innerHTML = -this.remainingBet;
+        this.nextRoundButtons();
+    }
+
     back() {
         if (this.index == 0) {
             switchScreen("rounds", "new-round");
@@ -775,16 +920,7 @@ class Scoreboard {
             let currentRound = this.round;
             this.index--;
             if (this.round != currentRound) {
-                for (let player of this.rounds[this.round].players) {
-                    player.displayAll();
-                }
-
-                document.getElementById(
-                    "round-suit"
-                ).innerHTML = `${this.cardsEach}${this.suitIcon}`;
-
-                document.getElementById("remaining-bet").innerHTML =
-                    -this.remainingBet;
+                this.reloadCompleteRound();
                 this.nextRoundButtons();
                 return;
             }
